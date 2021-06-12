@@ -26,7 +26,7 @@ int button_B = 3;
 int piezo = 10;
 int reset_switch = A0;
 
-int noteToBin(char note){//song 배열 속 주파수 값을 피아노 led불 위치 bit로 변환
+int noteToBin(char note){ //song 배열 속 주파수 값을 피아노 led불 위치 bit로 변환
   switch(note)
     {
       case 'C':
@@ -68,7 +68,8 @@ char playNote(){//버튼 입력 감지 후 음 출력, 출력한 음 반환
   buttonstate_A = !digitalRead(button_A);
   buttonstate_B = !digitalRead(button_B);
   buttonstate_reset = digitalRead(reset_switch); 
-  //건반 눌린게 있으면 음 출력하고 음 return, 없으면 빠르게 return 0
+  // 건반 눌린게 있으면 음 출력하고 음 return (X = reset)
+  // 건반 눌린게 없으면 빠르게 return 0
     if (buttonstate_C)
   {
     Cur_tone = 'C';
@@ -146,7 +147,7 @@ void loop()
     songstr.concat(wait);
     notecount++;
 
-    // Serial.read()로 한 문자씩 받아서 song_str 스트링에 concatenate시킴.
+    // Serial.read()로 문자열을 받아서 song_str 스트링에 concatenate시킴.
   }
    
   /**************본체 관련 코드**************/
@@ -183,7 +184,7 @@ void loop()
     digitalWrite(latchPin, LOW);
     shiftOut(dataPin, clockPin, MSBFIRST, reset_data);
     digitalWrite(latchPin, HIGH);
-
+    delay(100);
     }
   }
 }
