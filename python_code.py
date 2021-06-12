@@ -70,8 +70,7 @@ def freq_mapper(song):  # fft로 추출한 frequency 값을 arduino가 원하는
 
 
 rate, audio = wavfile.read('./test.wav')   # Read wav file
-# twinkle.wav(작은별)랑 air2.wav(비행기) 잘됨. air2는 마지막에 잡음 들어가서 error값 잡히긴 함.
-# test.wav는 비행기 비교적 빠른 템포로 친 것. 이거 바탕으로 자르는 값 수정 했더니 빠른 템포도 잘됨-마지막에 잡음 있음
+# test.wav는 "반짝반짝 작은별" 비교적 빠른 템포로 친 것. 이거 바탕으로 자르는 값 수정 했더니 빠른 템포도 잘됨-마지막에 잡음 있음
 # 한음을 대략 25000샘플 - 0.5초로 자름. 자른 지점부터 다음 음 사이는 소리 크기(amplitude)가 500 이하여야 됨.
 # 한음이 0.5초 이상 500이상의 크기로 지속되면 값 이상하게 나올 수도.
 # https://www.onlinepianist.com/virtual-piano 여기서 sustain 끄고 한음 짧게 짧게 쳐서 녹음
@@ -87,11 +86,11 @@ print(note_list)
 
 # pyserial 설치 필요 (Terminal에서 pip3 install pyserial)
 # 파이썬에서 실행할 경우, 파이썬 코드를 Run하지 않는 상황에서 아두이노 코드를 먼저 Upload한 후, 파이썬에서 Run해야 실행된다.
-# PORT number만 확인(수정)해주세요! (Arduino -> Tools -> Port)
+# PORT number만 확인 후 수정 필요 (Arduino -> Tools -> Port)
 
 # Set a PORT Number & baud rate
-PORT = 'COM4'       # 아두이노에서 포트 number 확인 후 필요 시 수정해주세요!
-BaudRate = 9600     # BaudRate = n | Serial.begin(n)
+PORT = 'COM4'                       # 아두이노에서 포트 number 확인 후 필요 시 수정
+BaudRate = 9600                     # BaudRate = n | Serial.begin(n)
 ARD = serial.Serial(PORT,BaudRate)
 
 note_string = ''.join([str(item) for item in note_list])
